@@ -1,7 +1,6 @@
-import {Avatar} from "../../components/avatar/avatar";
+import {Avatar} from "components/avatar/avatar";
 import {Col, Row} from "react-bootstrap";
-// @ts-ignore
-import avatar from "../../utils/images/avatar.jpg";
+import avatar from "utils/images/avatar.jpg";
 
 
 export const AboutMe = () => {

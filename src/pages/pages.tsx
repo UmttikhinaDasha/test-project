@@ -1,5 +1,5 @@
-import {Layout} from "../components/layout/layout";
 import {AboutMe} from "./aboutMe/aboutMe";
+import {Layout} from "components/layout/layout";
 
 
 export const Pages = () => {
