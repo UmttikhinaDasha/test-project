@@ -1,0 +1,17 @@
+.content-menu{
+  &__link{
+    text-decoration: none;
+    font-size: 20px;
+    color: black;
+    padding-bottom: 4px;
+    padding-left: 4px;
+
+    &:hover{
+      color: gray;
+    }
+
+    &--active{
+      color: dodgerblue;
+    }
+  }
+}

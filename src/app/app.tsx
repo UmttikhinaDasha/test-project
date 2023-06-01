@@ -1,8 +1,13 @@
-import {Pages} from "../pages/pages";
+import {Pages} from "pages/pages";
+import {createBrowserRouter, RouterProvider} from "react-router-dom";
+
+export const router = createBrowserRouter([
+  { path: '*', element: <Pages /> },
+]);
 
 function App() {
   return (
-    <Pages/>
+      <RouterProvider router={router} />
   );
 }
 

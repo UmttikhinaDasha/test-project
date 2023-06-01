@@ -1,7 +1,9 @@
 import { Nav, Offcanvas} from "react-bootstrap";
 import {Avatar} from "../../avatar/avatar";
-// @ts-ignore
-import avatar from "../../../utils/images/avatar.jpg";
+import avatar from "utils/images/avatar.jpg";
+import {NavLink} from "react-router-dom";
+import './contentMenu.scss'
+import clsx from "clsx";
 
 export const ContentMenu = () => {
     return (
@@ -17,8 +19,18 @@ export const ContentMenu = () => {
             </Offcanvas.Header>
             <Offcanvas.Body>
                 <Nav className="justify-content-end flex-grow-1 pe-3">
-                    <Nav.Link href="#action1">Список постов</Nav.Link>
-                    <Nav.Link href="#action2">Обо мне</Nav.Link>
+                    <NavLink to='posts'
+                             className={({ isActive }) =>
+                                 clsx('content-menu__link',
+                                     isActive && 'content-menu__link--active')}>
+                        Список постов
+                    </NavLink>
+                    <NavLink to='about-me'
+                             className={({ isActive }) =>
+                                 clsx('content-menu__link',
+                                     isActive && 'content-menu__link--active')}>
+                        Обо мне
+                    </NavLink>
                 </Nav>
             </Offcanvas.Body>
         </>

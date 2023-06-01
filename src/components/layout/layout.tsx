@@ -1,17 +1,14 @@
-import {FC, ReactNode} from 'react';
 import {Header} from "../header/header";
 import {Container} from "react-bootstrap";
+import {Outlet} from "react-router-dom";
 
-interface ILayoutProps {
-    children?: ReactNode
-}
 
-export const Layout: FC<ILayoutProps> = ({children}) => {
+export const Layout = () => {
     return (
         <>
            <Header/>
             <Container className="p-4">
-                {children}
+                <Outlet />
             </Container>
         </>
     );
