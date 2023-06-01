@@ -1,0 +1,9 @@
+.post{
+  min-width: 400px;
+
+  &__header{
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+}

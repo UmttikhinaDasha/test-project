@@ -1,11 +1,27 @@
-import {AboutMe} from "./aboutMe/aboutMe";
 import {Layout} from "components/layout/layout";
-
+import {Routes, Route, Navigate} from "react-router-dom";
+import {AboutMe} from "pages/aboutMe/aboutMe";
+import {Post} from "components/post/post";
 
 export const Pages = () => {
     return (
-        <Layout>
-            <AboutMe/>
-        </Layout>
+        <Routes>
+            <Route path='/' element={<Layout />}>
+                <Route
+                    path='/posts'
+                    element={<Post content='dkdkdkd' title='ldldldl'/>}
+                />
+                <Route
+                    path='/about-me'
+                    element={<AboutMe />}
+                />
+                <Route
+                    path='/'
+                    element={
+                        <Navigate replace to='/posts' />
+                    }
+                />
+            </Route>
+        </Routes>
     );
 };
