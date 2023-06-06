@@ -1,8 +1,8 @@
 import {Layout} from "components/layout/layout";
 import {Routes, Route, Navigate} from "react-router-dom";
 import {AboutMe} from "pages/aboutMe/aboutMe";
-import {Post} from "components/post/post";
 import {ErrorPage} from "pages/errorPage/errorPage";
+import {PostList} from "pages/postList/postList";
 
 export const Pages = () => {
     return (
@@ -10,7 +10,7 @@ export const Pages = () => {
             <Route path='/' element={<Layout />}>
                 <Route
                     path='/posts'
-                    element={<Post content='dkdkdkd' title='ldldldl'/>}
+                    element={<PostList/>}
                 />
                 <Route
                     path='/about-me'
