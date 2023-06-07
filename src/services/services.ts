@@ -1,5 +1,5 @@
 import axiosInstance from "./axiosInstance";
-import {IPost} from "../models/post";
+import {IPost} from "models/post";
 
 
 export const getPosts = (page: number) => {

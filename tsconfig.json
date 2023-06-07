@@ -25,6 +25,10 @@
       "components/*": ["./components/*"],
       "utils/*": ["./utils/*"],
       "pages/*": ["./pages/*"],
+      "store/*": ["./store/*"],
+      "services/*": ["./services/*"],
+      "hooks/*": ["./hooks/*"],
+      "models/*": ["./models/*"],
     }
   },
   "include": [

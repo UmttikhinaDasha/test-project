@@ -1,9 +1,8 @@
 import {useEffect} from "react";
 import {Post} from "components/post/post";
-import {useAppDispatch, useAppSelector} from "../../hooks/redux";
-import {selectorPosts, selectorPostsError, selectorPostsLoading, selectorTotalCount} from "../../store/selectors/posts";
-import {fetchPosts} from "../../store/actionCreators/posts";
-import {Spinner} from "react-bootstrap";
+import {useAppDispatch, useAppSelector} from "hooks/redux";
+import {selectorPosts, selectorPostsError, selectorPostsLoading, selectorTotalCount} from "store/selectors/posts";
+import {fetchPosts} from "store/actionCreators/posts";
 import {Pagination} from "components/pagination/pagination";
 import {Loading} from "components/loading/loading";
 import {Error} from "components/error/error";

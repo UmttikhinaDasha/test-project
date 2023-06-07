@@ -1,6 +1,6 @@
 import {createAsyncThunk} from "@reduxjs/toolkit";
-import {getPosts} from "../../services/services";
-import {IPost} from "../../models/post";
+import {getPosts} from "services/services";
+import {IPost} from "models/post";
 
 interface IFetchPostsResponse {
     /** Список постов */

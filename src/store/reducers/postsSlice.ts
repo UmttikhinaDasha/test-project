@@ -1,4 +1,4 @@
-import {IPost} from "../../models/post";
+import {IPost} from "models/post";
 import {createSlice} from "@reduxjs/toolkit";
 import {fetchPosts} from "../actionCreators/posts";
 

@@ -1,6 +1,6 @@
 import {Pages} from "pages/pages";
 import {createBrowserRouter, RouterProvider} from "react-router-dom";
-import {setupStore} from "../store/store";
+import {setupStore} from "store/store";
 import {Provider} from "react-redux";
 
 export const router = createBrowserRouter([
