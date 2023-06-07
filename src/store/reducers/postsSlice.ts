@@ -5,16 +5,19 @@ import {fetchPosts} from "../actionCreators/posts";
 interface IPostsState{
     /** Отображение загрузки данных */
     readonly loading: boolean;
-    /** Ошибка загрузки данных*/
+    /** Ошибка загрузки данных */
     readonly error: null | string;
-    /** Список постов*/
+    /** Список постов */
     readonly posts: IPost[];
+    /** Общее количество постов */
+    readonly totalCount: number;
 }
 
 const initialState: IPostsState = {
     loading: false,
     error: null,
     posts: [],
+    totalCount: 0
 }
 
 export const postsSlice = createSlice({
@@ -29,7 +32,8 @@ export const postsSlice = createSlice({
             .addCase(fetchPosts.fulfilled, (state, action)=> {
                 state.loading = false;
                 state.error = null;
-                state.posts = action.payload;
+                state.posts = action.payload.posts;
+                state.totalCount = action.payload.totalCount;
             })
             .addCase(fetchPosts.rejected, (state, action) => {
                 state.loading = false;

@@ -1,4 +1,4 @@
-import axios from "axios";
+import axios, {AxiosHeaders} from "axios";
 
 export const API_URL = 'https://jsonplaceholder.typicode.com';
 

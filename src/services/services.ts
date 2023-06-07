@@ -2,6 +2,6 @@ import axiosInstance from "./axiosInstance";
 import {IPost} from "../models/post";
 
 
-export const getPosts = () => {
-    return axiosInstance.get<IPost[]>('/posts')
+export const getPosts = (page: number) => {
+    return axiosInstance.get<IPost[]>(`/posts?_page=${page}`)
 }
