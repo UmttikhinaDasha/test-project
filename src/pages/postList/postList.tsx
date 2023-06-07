@@ -5,6 +5,8 @@ import {selectorPosts, selectorPostsError, selectorPostsLoading, selectorTotalCo
 import {fetchPosts} from "../../store/actionCreators/posts";
 import {Spinner} from "react-bootstrap";
 import {Pagination} from "components/pagination/pagination";
+import {Loading} from "components/loading/loading";
+import {Error} from "components/error/error";
 
 export const PostList = () => {
     const loading = useAppSelector(selectorPostsLoading);
@@ -27,11 +29,11 @@ export const PostList = () => {
 
     const renderPosts = () => {
         if (loading) {
-            return <Spinner animation="border" variant="primary"/>
+            return <Loading/>
         }
 
         if (error) {
-            return <div>{error}</div>
+            return <Error errorMessage={error}/>
         }
 
         return posts.map((post) => {
