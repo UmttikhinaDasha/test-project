@@ -9,3 +9,4 @@ const baseSelectorPosts = createSelector(
 export const selectorPostsLoading = createSelector(baseSelectorPosts, state => state.loading)
 export const selectorPostsError = createSelector(baseSelectorPosts, state => state.error)
 export const selectorPosts = createSelector(baseSelectorPosts, state => state.posts)
+export const selectorTotalCount = createSelector(baseSelectorPosts, state => state.totalCount)
