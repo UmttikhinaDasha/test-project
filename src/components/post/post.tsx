@@ -1,32 +1,70 @@
-import {Button, Card, Col, Row} from "react-bootstrap";
-import {FC} from "react";
-import {Avatar} from "components/avatar/avatar";
-import avatarPost from 'utils/images/defaultAvatar.png'
-import './post.scss'
+import {FC, useState} from "react";
+import {PostBody} from "components/post/postBody/postBody";
+import {Comment} from "components/post/comment/comment";
+import {useAppSelector} from "hooks/redux";
+import {selectorComments, selectorCommentsError, selectorCommentsLoading} from "store/selectors/comments";
+import {Loading} from "components/loading/loading";
+import {Error} from "components/error/error";
 
 interface IPostProps {
-    title: string
-    content: string;
+    /** Заголовок поста */
+    readonly titlePost: string;
+    /** Текст поста */
+    readonly contentPost: string;
+    /** Идентификатор поста*/
+    readonly postId: number;
+    /**
+     * Получение комментарие к посту
+     * @param postId - id поста.
+     * */
+    getComments(postId: number): void
 }
 
 export const Post: FC<IPostProps> = (props) => {
-    const {title, content} = props;
+    const {titlePost, contentPost, postId, getComments} = props;
+
+    const comments = useAppSelector(selectorComments);
+    const loading = useAppSelector(selectorCommentsLoading);
+    const error = useAppSelector(selectorCommentsError);
+
+    const [showComments, setShowComments] = useState(false);
+
+    const onShowComments = () => {
+        setShowComments(true)
+    }
+
+    const onHideComments = () => {
+        setShowComments(false)
+    }
+
+    const renderComments = () => {
+        if(!comments[postId] && loading){
+            return <Loading/>
+        }
+
+        if(!comments[postId] && error){
+            return <Error errorMessage={error}/>
+        }
+
+        return comments[postId].map(comment => {
+            return <Comment key={comment.id}
+                            userEmail={comment.email}
+                            text={comment.body}
+            />
+        })
+    }
 
     return (
-        <Row className="row justify-content-center">
-            <Col md={9}>
-                <Card className='post'>
-                    <Card.Body>
-                        <div className='post__header'>
-                            <Avatar image={avatarPost} width={50} height={50}/>
-                            <Card.Title>{title}</Card.Title>
-                        </div>
-                        <Card.Text className='m-2'>{content}</Card.Text>
-                        <Button className='m-1' variant="primary" >Комментарии</Button>
-                    </Card.Body>
-                </Card>
-            </Col>
-        </Row>
-
+        <>
+            <PostBody title={titlePost}
+                      content={contentPost}
+                      showComments={showComments}
+                      getComments={() => getComments(postId)}
+                      onShowComments={onShowComments}
+                      onHideComments={onHideComments}
+            />
+            {showComments && renderComments()}
+        </>
     );
 };
+

@@ -3,7 +3,6 @@ import {FC, useState} from "react";
 
 interface IPaginationProps {
     readonly totalCountPage: number;
-
     getNewPage(page: number): void;
 }
 
@@ -34,7 +33,7 @@ export const Pagination: FC<IPaginationProps> = (props) => {
     }
 
     return (
-        <Row className="row justify-content-center">
+        <Row className="justify-content-center">
             <Col md={9}>
                 <PaginationBootstrap>
                     {renderPaginationItems()}
