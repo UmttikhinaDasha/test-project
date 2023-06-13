@@ -1,4 +1,4 @@
-import {Col, Pagination as PaginationBootstrap, Row} from 'react-bootstrap';
+import {Pagination as PaginationBootstrap} from 'react-bootstrap';
 import {FC, useState} from "react";
 
 interface IPaginationProps {
@@ -33,12 +33,8 @@ export const Pagination: FC<IPaginationProps> = (props) => {
     }
 
     return (
-        <Row className="justify-content-center">
-            <Col md={9}>
-                <PaginationBootstrap>
-                    {renderPaginationItems()}
-                </PaginationBootstrap>
-            </Col>
-        </Row>
+        <PaginationBootstrap className='mt-4'>
+            {renderPaginationItems()}
+        </PaginationBootstrap>
     );
 };

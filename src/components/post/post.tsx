@@ -13,6 +13,8 @@ interface IPostProps {
     readonly contentPost: string;
     /** Идентификатор поста*/
     readonly postId: number;
+    /** Идентификатор автора поста*/
+    readonly userId: number;
     /**
      * Получение комментарие к посту
      * @param postId - id поста.
@@ -21,7 +23,7 @@ interface IPostProps {
 }
 
 export const Post: FC<IPostProps> = (props) => {
-    const {titlePost, contentPost, postId, getComments} = props;
+    const {titlePost, contentPost, postId, userId, getComments} = props;
 
     const comments = useAppSelector(selectorComments);
     const loading = useAppSelector(selectorCommentsLoading);
@@ -58,6 +60,7 @@ export const Post: FC<IPostProps> = (props) => {
         <>
             <PostBody title={titlePost}
                       content={contentPost}
+                      userId={userId}
                       showComments={showComments}
                       getComments={() => getComments(postId)}
                       onShowComments={onShowComments}

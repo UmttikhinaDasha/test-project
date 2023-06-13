@@ -7,6 +7,7 @@ import {Loading} from "components/loading/loading";
 import {Error} from "components/error/error";
 import {fetchComments} from "store/actionCreators/comments";
 import {Post} from "components/post/post";
+import {Col, Row} from "react-bootstrap";
 
 
 export const PostList = () => {
@@ -44,18 +45,21 @@ export const PostList = () => {
 
         return posts.map((post) => {
             return <Post key={post.id}
+                         postId={post.id}
+                         userId={post.userId}
                          titlePost={post.title}
                          contentPost={post.body}
                          getComments={getComments}
-                         postId={post.id}
             />
         })
     }
 
     return (
-        <>
-            {renderPosts()}
-            <Pagination totalCountPage={totalCountPage} getNewPage={getPosts}/>
-        </>
+        <Row className="row justify-content-center">
+            <Col md={10}>
+                {renderPosts()}
+                <Pagination totalCountPage={totalCountPage} getNewPage={getPosts}/>
+            </Col>
+        </Row>
     );
 };

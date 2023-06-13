@@ -1,0 +1,26 @@
+.button-back{
+  position: sticky;
+  top: 25px;
+  font-size: 20px;
+  text-decoration: none;
+  color: #0D6EFD;
+  display: flex;
+  margin-bottom: 14px;
+
+  &:before{
+    content: '';
+    background-image: url("../../utils/images/imageBack.png");
+    background-size: 30px;
+    width: 30px;
+    height: 30px;
+    margin-right: 4px;
+  }
+
+  &:hover{
+    text-decoration: underline;
+  }
+
+  &:active{
+    color: dodgerblue;
+  }
+}

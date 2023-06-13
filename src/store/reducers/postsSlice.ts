@@ -1,6 +1,7 @@
 import {IPost} from "models/post";
 import {createSlice} from "@reduxjs/toolkit";
 import {fetchPosts} from "../actionCreators/posts";
+import {fetchUserPosts} from "store/actionCreators/userPosts";
 
 interface IPostsState{
     /** Отображение загрузки данных */
@@ -36,6 +37,19 @@ export const postsSlice = createSlice({
                 state.totalCount = action.payload.totalCount;
             })
             .addCase(fetchPosts.rejected, (state, action) => {
+                state.loading = false;
+                state.error = action.payload ?? '';
+                state.posts = [];
+            })
+            .addCase(fetchUserPosts.pending, state => {
+                state.loading = true;
+            })
+            .addCase(fetchUserPosts.fulfilled, (state, action)=> {
+                state.loading = false;
+                state.error = null;
+                state.posts = action.payload.posts;
+            })
+            .addCase(fetchUserPosts.rejected, (state, action) => {
                 state.loading = false;
                 state.error = action.payload ?? '';
                 state.posts = [];

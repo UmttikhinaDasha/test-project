@@ -3,6 +3,7 @@ import {Routes, Route, Navigate} from "react-router-dom";
 import {AboutMe} from "pages/aboutMe/aboutMe";
 import {ErrorPage} from "pages/errorPage/errorPage";
 import {PostList} from "pages/postList/postList";
+import {User} from "pages/user/user";
 
 export const Pages = () => {
     return (
@@ -15,6 +16,10 @@ export const Pages = () => {
                 <Route
                     path='/about-me'
                     element={<AboutMe />}
+                />
+                <Route
+                    path='/user/:userId'
+                    element={<User />}
                 />
                 <Route
                     path='/'
