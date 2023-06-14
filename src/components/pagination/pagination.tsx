@@ -1,30 +1,29 @@
 import {Pagination as PaginationBootstrap} from 'react-bootstrap';
-import {FC, useState} from "react";
+import {FC} from "react";
 
 interface IPaginationProps {
+    readonly currentPage: number;
     readonly totalCountPage: number;
-    getNewPage(page: number): void;
+    setCurrentPage(newCurrentPage: number): void;
 }
 
 export const Pagination: FC<IPaginationProps> = (props) => {
-    const {totalCountPage, getNewPage} = props;
-    const [active, setActive] = useState(1)
+    const {totalCountPage, currentPage, setCurrentPage} = props;
 
     const changePage = (index: number): void => {
-        getNewPage(index + 1)
-        setActive(index + 1)
+        setCurrentPage(index)
     }
 
     const renderPaginationItems = () => {
         const paginationItems = []
 
-        for (let i = 0; i < totalCountPage; i++) {
+        for (let i = 1; i <= totalCountPage; i++) {
             paginationItems.push(
                 <PaginationBootstrap.Item
                     key={i}
-                    active={active === i + 1}
+                    active={currentPage === i}
                     onClick={() => changePage(i)}>
-                    {i + 1}
+                    {i}
                 </PaginationBootstrap.Item>
             )
         }

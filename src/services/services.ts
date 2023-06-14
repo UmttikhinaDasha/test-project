@@ -2,10 +2,13 @@ import axiosInstance from "./axiosInstance";
 import {IPost} from "models/post";
 import {IComment} from "models/comment";
 import {IUserResponse} from "models/user";
+import {TSort} from "models/sort";
 
 
-
-export const getPosts = (page: number) => {
+export const getPosts = (page: number, sort?: TSort ) => {
+    if(sort){
+        return axiosInstance.get<IPost[]>(`/posts?_page=${page}&_sort=title&_order=${sort}`)
+    }
     return axiosInstance.get<IPost[]>(`/posts?_page=${page}`)
 }
 

@@ -1,4 +1,4 @@
-import {useEffect} from "react";
+import {useEffect, useState} from "react";
 import {useAppDispatch, useAppSelector} from "hooks/redux";
 import {selectorPosts, selectorPostsError, selectorPostsLoading, selectorTotalCount} from "store/selectors/posts";
 import {fetchPosts} from "store/actionCreators/posts";
@@ -8,6 +8,8 @@ import {Error} from "components/error/error";
 import {fetchComments} from "store/actionCreators/comments";
 import {Post} from "components/post/post";
 import {Col, Row} from "react-bootstrap";
+import {DropdownSort} from "components/dropdownSort/dropdownSort";
+import {TSort} from "models/sort";
 
 
 export const PostList = () => {
@@ -16,18 +18,20 @@ export const PostList = () => {
     const posts = useAppSelector(selectorPosts);
     const totalCountPosts = useAppSelector(selectorTotalCount);
 
-
     const LIMIT_PAGE = 10;
     const totalCountPage = totalCountPosts / LIMIT_PAGE;
 
     const dispatch = useAppDispatch();
 
-    useEffect(() => {
-        getPosts(1)
-    }, []);
+    const [currentPage, setCurrentPage] = useState(1)
+    const [sort, setSort] = useState<TSort>();
 
-    const getPosts = (page: number) => {
-        dispatch(fetchPosts(page));
+    useEffect(() => {
+        getPosts(currentPage, sort)
+    }, [currentPage, sort]);
+
+    const getPosts = (page: number, sort?: TSort) => {
+        dispatch(fetchPosts({page, sort}));
     }
 
     const getComments = (postId: number) => {
@@ -54,11 +58,32 @@ export const PostList = () => {
         })
     }
 
+    const onSortAscending = () => {
+        setSort('asc');
+        setCurrentPage(1);
+    }
+
+    const onSortDescending = () => {
+        setSort('desc');
+        setCurrentPage(1);
+    }
+
+    const onResetSorting = () => {
+        setSort(undefined);
+        setCurrentPage(1);
+    }
+
     return (
         <Row className="row justify-content-center">
             <Col md={10}>
+                <DropdownSort sortAscending={onSortAscending}
+                              sortDescending={onSortDescending}
+                              resetSorting={onResetSorting}/>
                 {renderPosts()}
-                <Pagination totalCountPage={totalCountPage} getNewPage={getPosts}/>
+                <Pagination totalCountPage={totalCountPage}
+                            currentPage={currentPage}
+                            setCurrentPage={setCurrentPage}
+                            getNewPage={getPosts}/>
             </Col>
         </Row>
     );
