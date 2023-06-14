@@ -5,11 +5,15 @@ import {IUserResponse} from "models/user";
 import {TSort} from "models/sort";
 
 
-export const getPosts = (page: number, sort?: TSort ) => {
-    if(sort){
-        return axiosInstance.get<IPost[]>(`/posts?_page=${page}&_sort=title&_order=${sort}`)
+export const getPosts = (page: number, sort?: TSort, search?: string) => {
+    let url = `/posts?_page=${page}`;
+    if (sort) {
+        url = url + `&_sort=title&_order=${sort}`
     }
-    return axiosInstance.get<IPost[]>(`/posts?_page=${page}`)
+    if (search) {
+        url = url + `&title_like=${search}`
+    }
+    return axiosInstance.get<IPost[]>(url);
 }
 
 export const getComments = (postId: number) => {

@@ -15,13 +15,15 @@ interface IRequestParams {
     readonly page: number,
     /** Тип сортировки */
     readonly sort?: TSort;
+    /** Строка для поиска заголовка */
+    readonly search?: string;
 }
 
 export const fetchPosts = createAsyncThunk<IFetchPostsResponse, IRequestParams, { readonly rejectValue: string; }>(
     'fetchPosts',
-    async ({page, sort}, thunkAPI) => {
+    async ({page, sort, search}, thunkAPI) => {
         try {
-            const response = await getPosts(page, sort);
+            const response = await getPosts(page, sort, search);
             return {posts: response.data, totalCount: Number(response.headers['x-total-count'])}
         } catch (e: unknown) {
             return thunkAPI.rejectWithValue('Ошибка получения данных');

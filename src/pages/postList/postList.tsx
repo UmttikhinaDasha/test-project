@@ -10,6 +10,9 @@ import {Post} from "components/post/post";
 import {Col, Row} from "react-bootstrap";
 import {DropdownSort} from "components/dropdownSort/dropdownSort";
 import {TSort} from "models/sort";
+import {Search} from "components/search/search";
+import {useDebounce} from "hooks/useDebounce";
+import './postList.scss'
 
 
 export const PostList = () => {
@@ -18,20 +21,23 @@ export const PostList = () => {
     const posts = useAppSelector(selectorPosts);
     const totalCountPosts = useAppSelector(selectorTotalCount);
 
-    const LIMIT_PAGE = 10;
-    const totalCountPage = totalCountPosts / LIMIT_PAGE;
-
     const dispatch = useAppDispatch();
 
     const [currentPage, setCurrentPage] = useState(1)
     const [sort, setSort] = useState<TSort>();
+    const [search, setSearch] = useState('');
+
+    const debouncedSearch = useDebounce(search, 500);
+
+    const LIMIT_PAGE = 10;
+    const totalCountPage = totalCountPosts / LIMIT_PAGE;
 
     useEffect(() => {
-        getPosts(currentPage, sort)
-    }, [currentPage, sort]);
+        getPosts(currentPage, sort, debouncedSearch)
+    }, [currentPage, sort, debouncedSearch]);
 
-    const getPosts = (page: number, sort?: TSort) => {
-        dispatch(fetchPosts({page, sort}));
+    const getPosts = (page: number, sort?: TSort, search?: string) => {
+        dispatch(fetchPosts({page, sort, search}));
     }
 
     const getComments = (postId: number) => {
@@ -45,6 +51,10 @@ export const PostList = () => {
 
         if (error) {
             return <Error errorMessage={error}/>
+        }
+
+        if(posts.length === 0){
+            return <div className='post-list__emty'>Посты не найдены</div>
         }
 
         return posts.map((post) => {
@@ -76,13 +86,19 @@ export const PostList = () => {
     return (
         <Row className="row justify-content-center">
             <Col md={10}>
+                <Search searchSrc={search}
+                        setSearchSrc={setSearch}
+                        className='mb-3'
+                />
                 <DropdownSort sortAscending={onSortAscending}
                               sortDescending={onSortDescending}
-                              resetSorting={onResetSorting}/>
+                              resetSorting={onResetSorting}
+                />
                 {renderPosts()}
                 <Pagination totalCountPage={totalCountPage}
                             currentPage={currentPage}
-                            setCurrentPage={setCurrentPage}/>
+                            setCurrentPage={setCurrentPage}
+                />
             </Col>
         </Row>
     );
