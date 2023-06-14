@@ -82,8 +82,7 @@ export const PostList = () => {
                 {renderPosts()}
                 <Pagination totalCountPage={totalCountPage}
                             currentPage={currentPage}
-                            setCurrentPage={setCurrentPage}
-                            getNewPage={getPosts}/>
+                            setCurrentPage={setCurrentPage}/>
             </Col>
         </Row>
     );
