@@ -23,6 +23,12 @@ export const Pages = (): ReactElement => (
                     element={<User />}
                 />
                 <Route
+                    path='/test-project'
+                    element={
+                        <Navigate replace to='/posts' />
+                    }
+                />
+                <Route
                     path='/'
                     element={
                         <Navigate replace to='/posts' />
