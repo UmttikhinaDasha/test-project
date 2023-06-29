@@ -29,12 +29,6 @@ export const Pages = (): ReactElement => (
                     }
                 />
                 <Route
-                    path='/'
-                    element={
-                        <Navigate replace to='/posts' />
-                    }
-                />
-                <Route
                     path='*'
                     element={<ErrorPage />}
                 />
