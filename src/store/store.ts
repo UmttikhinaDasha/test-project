@@ -1,7 +1,8 @@
-import {combineReducers, configureStore} from "@reduxjs/toolkit";
-import postsReducer from "./reducers/postsSlice";
-import commentsReducer from "./reducers/commentsSlice";
-import userReducer from  "./reducers/userSlice"
+import { combineReducers, configureStore } from '@reduxjs/toolkit';
+
+import postsReducer from './reducers/postsSlice';
+import commentsReducer from './reducers/commentsSlice';
+import userReducer from './reducers/userSlice';
 
 const rootReducer = combineReducers({
     postsReducer,
@@ -9,7 +10,7 @@ const rootReducer = combineReducers({
     userReducer,
 });
 
-
+/* eslint-disable */
 export const setupStore = () => {
     return configureStore({
         reducer: rootReducer,

@@ -1,16 +1,22 @@
-import {IPost} from "models/post";
-import {createSlice} from "@reduxjs/toolkit";
-import {fetchPosts} from "../actionCreators/posts";
-import {fetchUserPosts} from "store/actionCreators/userPosts";
+import { IPost } from 'models/post';
+import { createSlice } from '@reduxjs/toolkit';
 
-interface IPostsState{
-    /** Отображение загрузки данных */
+import { fetchUserPosts } from 'store/actionCreators/userPosts';
+
+import { fetchPosts } from '../actionCreators/posts';
+
+interface IPostsState {
+
+    /** Отображение загрузки данных. */
     readonly loading: boolean;
-    /** Ошибка загрузки данных */
+
+    /** Ошибка загрузки данных. */
     readonly error: null | string;
-    /** Список постов */
+
+    /** Список постов. */
     readonly posts: IPost[];
-    /** Общее количество постов */
+
+    /** Общее количество постов. */
     readonly totalCount: number;
 }
 
@@ -18,8 +24,8 @@ const initialState: IPostsState = {
     loading: false,
     error: null,
     posts: [],
-    totalCount: 0
-}
+    totalCount: 0,
+};
 
 export const postsSlice = createSlice({
     name: 'postsSlice',
@@ -30,7 +36,7 @@ export const postsSlice = createSlice({
             .addCase(fetchPosts.pending, state => {
                 state.loading = true;
             })
-            .addCase(fetchPosts.fulfilled, (state, action)=> {
+            .addCase(fetchPosts.fulfilled, (state, action) => {
                 state.loading = false;
                 state.error = null;
                 state.posts = action.payload.posts;
@@ -44,7 +50,7 @@ export const postsSlice = createSlice({
             .addCase(fetchUserPosts.pending, state => {
                 state.loading = true;
             })
-            .addCase(fetchUserPosts.fulfilled, (state, action)=> {
+            .addCase(fetchUserPosts.fulfilled, (state, action) => {
                 state.loading = false;
                 state.error = null;
                 state.posts = action.payload.posts;
@@ -54,6 +60,6 @@ export const postsSlice = createSlice({
                 state.error = action.payload ?? '';
                 state.posts = [];
             }),
-})
+});
 
 export default postsSlice.reducer;

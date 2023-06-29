@@ -1,13 +1,16 @@
-import {createSlice} from "@reduxjs/toolkit";
-import {IUser} from "models/user";
-import {fetchUser} from "store/actionCreators/user";
+import { createSlice } from '@reduxjs/toolkit';
+import { IUser } from 'models/user';
+import { fetchUser } from 'store/actionCreators/user';
 
 interface IUserState {
-    /** Отображение загрузки данных */
+
+    /** Отображение загрузки данных. */
     readonly loading: boolean;
-    /** Ошибка загрузки данных */
+
+    /** Ошибка загрузки данных. */
     readonly error: null | string;
-    /** Данные пользователя */
+
+    /** Данные пользователя. */
     readonly user: IUser;
 }
 
@@ -23,7 +26,7 @@ const initialState: IUserState = {
         phone: '',
         website: '',
     },
-}
+};
 
 export const userSlice = createSlice({
     name: 'userSlice',
@@ -44,6 +47,6 @@ export const userSlice = createSlice({
                 state.error = action.payload ?? '';
                 state.user = initialState.user;
             }),
-})
+});
 
 export default userSlice.reducer;

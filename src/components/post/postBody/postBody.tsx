@@ -1,28 +1,35 @@
-import {Button, Card} from "react-bootstrap";
-import {FC} from "react";
-import {Avatar} from "components/avatar/avatar";
-import avatarPost from 'utils/images/defaultAvatar.png'
-import './postBody.scss'
-import {Link} from "react-router-dom";
+import { Button, Card } from 'react-bootstrap';
+import { FC } from 'react';
+import { Avatar } from 'components/avatar/avatar';
+import avatarPost from 'utils/images/defaultAvatar.png';
+import { Link } from 'react-router-dom';
+import './postBody.scss';
 
 interface IPostBodyProps {
-    /** Заголовок поста */
-    readonly title: string
-    /** Текст поста */
+
+    /** Заголовок поста.*/
+    readonly title: string;
+
+    /** Текст поста.*/
     readonly content: string;
-    /** Значение для изменения видимости комм-ев */
+
+    /** Значение для изменения видимости комм-ев.*/
     readonly showComments: boolean;
-    /** Идентификатор автора поста*/
+
+    /** Идентификатор автора поста.*/
     readonly userId: number;
-    /** Получить комментарии к посту */
+
+    /** Получить комментарии к посту.*/
     getComments(): void;
-    /** Показать комментарии */
+
+    /** Показать комментарии.*/
     onShowComments(): void;
-    /** Скрыть комментарии */
+
+    /** Скрыть комментарии.*/
     onHideComments(): void;
 }
 
-export const PostBody: FC<IPostBodyProps> = (props) => {
+export const PostBody: FC<IPostBodyProps> = props => {
     const {
         title,
         content,
@@ -30,23 +37,24 @@ export const PostBody: FC<IPostBodyProps> = (props) => {
         getComments,
         onShowComments,
         onHideComments,
-        showComments} = props;
+        showComments,
+    } = props;
 
-    const getCommentsOfPost = () => {
+    const getCommentsOfPost = (): void => {
         getComments();
-        onShowComments()
-    }
+        onShowComments();
+    };
 
     return (
         <Card className='post'>
             <Card.Body>
                 <div className='post__header'>
                     <Link to={`/user/${userId}`}
-                          title='Показать информацию о пользователе'>
+                        title='Показать информацию о пользователе'>
                         <Avatar image={avatarPost}
-                                width={60}
-                                height={60}
-                                className='post__header-avatar'
+                            width={60}
+                            height={60}
+                            className='post__header-avatar'
                         />
                     </Link>
                     <Card.Title>{title}</Card.Title>
@@ -54,15 +62,15 @@ export const PostBody: FC<IPostBodyProps> = (props) => {
                 <Card.Text className='m-2'>{content}</Card.Text>
                 {!showComments &&
                     <Button className='m-1'
-                            variant="primary"
-                            onClick={getCommentsOfPost}>
+                        variant="primary"
+                        onClick={getCommentsOfPost}>
                         Комментарии
                     </Button>
                 }
                 {showComments &&
                     <Button className='m-1'
-                            variant="primary"
-                            onClick={onHideComments}>
+                        variant="primary"
+                        onClick={onHideComments}>
                         Скрыть комментарии
                     </Button>
                 }

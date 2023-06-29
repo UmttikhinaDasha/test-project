@@ -1,13 +1,15 @@
-import {Col, Container, Row} from "react-bootstrap";
-import {FC} from "react";
-import './error.scss'
+import { Col, Container, Row } from 'react-bootstrap';
+import { FC } from 'react';
+import './error.scss';
 
 interface IErrorProps {
+
+    /** Сообщение ошибки. */
     readonly errorMessage: string | null;
 }
 
-export const Error: FC<IErrorProps> = (props) => {
-    const {errorMessage} = props;
+export const Error: FC<IErrorProps> = props => {
+    const { errorMessage } = props;
 
     return (
         <Container>

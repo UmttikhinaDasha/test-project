@@ -1,29 +1,34 @@
-import {FC, useState} from "react";
-import {PostBody} from "components/post/postBody/postBody";
-import {Comment} from "components/post/comment/comment";
-import {useAppSelector} from "hooks/redux";
-import {selectorComments, selectorCommentsError, selectorCommentsLoading} from "store/selectors/comments";
-import {Loading} from "components/loading/loading";
-import {Error} from "components/error/error";
+import { FC, ReactElement, useState } from 'react';
+import { PostBody } from 'components/post/postBody/postBody';
+import { Comment } from 'components/post/comment/comment';
+import { useAppSelector } from 'hooks/redux';
+import { selectorComments, selectorCommentsError, selectorCommentsLoading } from 'store/selectors/comments';
+import { Loading } from 'components/loading/loading';
+import { Error } from 'components/error/error';
 
 interface IPostProps {
-    /** Заголовок поста */
+
+    /** Заголовок поста.*/
     readonly titlePost: string;
-    /** Текст поста */
+
+    /** Текст поста.*/
     readonly contentPost: string;
-    /** Идентификатор поста*/
+
+    /** Идентификатор поста.*/
     readonly postId: number;
-    /** Идентификатор автора поста*/
+
+    /** Идентификатор автора поста.*/
     readonly userId: number;
+
     /**
-     * Получение комментарие к посту
-     * @param postId - id поста.
-     * */
-    getComments(postId: number): void
+     * Получение комментарие к посту.
+     * @param postId - Id поста.
+     */
+    getComments(postId: number): void;
 }
 
-export const Post: FC<IPostProps> = (props) => {
-    const {titlePost, contentPost, postId, userId, getComments} = props;
+export const Post: FC<IPostProps> = props => {
+    const { titlePost, contentPost, postId, userId, getComments } = props;
 
     const comments = useAppSelector(selectorComments);
     const loading = useAppSelector(selectorCommentsLoading);
@@ -31,43 +36,40 @@ export const Post: FC<IPostProps> = (props) => {
 
     const [showComments, setShowComments] = useState(false);
 
-    const onShowComments = () => {
-        setShowComments(true)
-    }
+    const onShowComments = (): void => {
+        setShowComments(true);
+    };
 
-    const onHideComments = () => {
-        setShowComments(false)
-    }
+    const onHideComments = (): void => {
+        setShowComments(false);
+    };
 
-    const renderComments = () => {
-        if(!comments[postId] && loading){
-            return <Loading/>
+    const renderComments = (): ReactElement | ReactElement[] => {
+        if (loading.includes(postId)) {
+            return <Loading />;
         }
 
-        if(!comments[postId] && error){
-            return <Error errorMessage={error}/>
+        if (!comments[postId] && error) {
+            return <Error errorMessage={error} />;
         }
 
-        return comments[postId].map(comment => {
-            return <Comment key={comment.id}
-                            userEmail={comment.email}
-                            text={comment.body}
-            />
-        })
-    }
+        return comments[postId]?.map(comment => <Comment key={comment.id}
+            userEmail={comment.email}
+            text={comment.body}
+        />);
+    };
 
     return (
         <>
             <PostBody title={titlePost}
-                      content={contentPost}
-                      userId={userId}
-                      showComments={showComments}
-                      getComments={() => getComments(postId)}
-                      onShowComments={onShowComments}
-                      onHideComments={onHideComments}
+                content={contentPost}
+                userId={userId}
+                showComments={showComments}
+                getComments={() => getComments(postId)}
+                onShowComments={onShowComments}
+                onHideComments={onHideComments}
             />
             {showComments && renderComments()}
         </>
     );
 };
-

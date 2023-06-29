@@ -1,16 +1,18 @@
-import React, {FC} from 'react';
-import {Card, Col, Row} from "react-bootstrap";
-import {Avatar} from "components/avatar/avatar";
-import avatarUser from "utils/images/defaultAvatar.png";
-import {IUser} from "models/user";
+import { FC } from 'react';
+import { Card, Col, Row } from 'react-bootstrap';
+import { Avatar } from 'components/avatar/avatar';
+import avatarUser from 'utils/images/defaultAvatar.png';
+import { IUser } from 'models/user';
 import '../userCard/userCard.scss';
 
 interface IUserCardProps {
+
+    /** Данные пользователя.*/
     readonly user: IUser;
 }
 
-export const UserCard: FC<IUserCardProps> = (props) => {
-    const {user} = props;
+export const UserCard: FC<IUserCardProps> = props => {
+    const { user } = props;
 
     return (
         <Card className='user-card'>
@@ -18,9 +20,9 @@ export const UserCard: FC<IUserCardProps> = (props) => {
                 <Row className='align-items-start m-1'>
                     <Col className='col-md-auto'>
                         <Avatar image={avatarUser}
-                                width={150}
-                                height={170}
-                                className='user-card__image'
+                            width={150}
+                            height={170}
+                            className='user-card__image'
                         />
                     </Col>
                     <Col>

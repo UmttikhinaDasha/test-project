@@ -1,37 +1,59 @@
+/** Представляет данные пользователя, которые приходят с сервера. */
 export interface IUserResponse {
-    /** id пользователя*/
+
+    /** Id пользователя.*/
     readonly id: number | null;
-    /** Имя пользователя*/
+
+    /** Имя пользователя.*/
     readonly name: string;
-    /** Имя пользователя на сайте */
+
+    /** Имя пользователя на сайте.*/
     readonly username: string;
-    /** Электронная почта */
+
+    /** Электронная почта.*/
     readonly email: string;
-    /** Адрес */
+
+    /** Адрес проживания.*/
     readonly address: {
-        street: string,
-        suite: string,
-        city: string,
-    }
-    /** Номер телефона */
+
+        /** Улица.*/
+        street: string;
+
+        /** Квартира.*/
+        suite: string;
+
+        /** Город.*/
+        city: string;
+    };
+
+    /** Номер телефона. */
     readonly phone: string;
-    /** Веб-сайт пользователя */
+
+    /** Веб-сайт пользователя. */
     readonly website: string;
 }
 
+/** Представляет данные пользователя, которые используются в компонентах. */
 export interface IUser {
-    /** id пользователя*/
+
+    /** Id пользователя.*/
     readonly id: number | null;
-    /** Имя пользователя*/
+
+    /** Имя пользователя.*/
     readonly name: string;
-    /** Имя пользователя на сайте */
+
+    /** Имя пользователя на сайте. */
     readonly userName: string;
-    /** Электронная почта */
+
+    /** Электронная почта. */
     readonly email: string;
-    /** Адрес */
+
+    /** Адрес. */
     readonly address: string;
-    /** Номер телефона */
+
+    /** Номер телефона. */
     readonly phone: string;
-    /** Веб-сайт пользователя */
+
+    /** Веб-сайт пользователя. */
     readonly website: string;
 }

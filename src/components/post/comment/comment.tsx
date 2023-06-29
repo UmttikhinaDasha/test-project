@@ -1,16 +1,18 @@
-import {FC} from "react";
-import {ListGroup} from "react-bootstrap";
-import '../comment/comment.scss'
+import { FC } from 'react';
+import { ListGroup } from 'react-bootstrap';
+import '../comment/comment.scss';
 
 interface ICommentProps {
-    /** Почта автора комментария */
+
+    /** Почта автора комментария. */
     readonly userEmail?: string;
-    /** Текст комментария */
+
+    /** Текст комментария. */
     readonly text?: string;
 }
 
-export const Comment: FC<ICommentProps> = (props) => {
-    const {userEmail, text} = props;
+export const Comment: FC<ICommentProps> = props => {
+    const { userEmail, text } = props;
 
     return (
         <ListGroup className='comment'>

@@ -1,21 +1,30 @@
-import {Pagination as PaginationBootstrap} from 'react-bootstrap';
-import {FC} from "react";
+import { Pagination as PaginationBootstrap } from 'react-bootstrap';
+import { FC } from 'react';
 
 interface IPaginationProps {
+
+    /** Текущая страница. */
     readonly currentPage: number;
+
+    /** Общее количество страниц. */
     readonly totalCountPage: number;
+
+    /**
+     * Установить текущую страницу.
+     * @param newCurrentPage - Новая текущая страница.
+     */
     setCurrentPage(newCurrentPage: number): void;
 }
 
-export const Pagination: FC<IPaginationProps> = (props) => {
-    const {totalCountPage, currentPage, setCurrentPage} = props;
+export const Pagination: FC<IPaginationProps> = props => {
+    const { totalCountPage, currentPage, setCurrentPage } = props;
 
     const changePage = (index: number): void => {
-        setCurrentPage(index)
-    }
+        setCurrentPage(index);
+    };
 
-    const renderPaginationItems = () => {
-        const paginationItems = []
+    const renderPaginationItems = (): JSX.Element[] => {
+        const paginationItems = [];
 
         for (let i = 1; i <= totalCountPage; i++) {
             paginationItems.push(
@@ -24,15 +33,15 @@ export const Pagination: FC<IPaginationProps> = (props) => {
                     active={currentPage === i}
                     onClick={() => changePage(i)}>
                     {i}
-                </PaginationBootstrap.Item>
-            )
+                </PaginationBootstrap.Item>,
+            );
         }
 
         return paginationItems;
-    }
+    };
 
     return (
-        <PaginationBootstrap className='mt-4'>
+        <PaginationBootstrap className='mt-4' style={{ minWidth: 300 }}>
             {renderPaginationItems()}
         </PaginationBootstrap>
     );

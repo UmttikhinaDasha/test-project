@@ -1,40 +1,42 @@
-import {Dropdown} from "react-bootstrap";
-import {FC, useState} from "react";
+import { Dropdown } from 'react-bootstrap';
+import { FC, useState } from 'react';
 
+/** Перечисление вариантов сортировки. */
 enum SortName {
     Asc = 'По возрастанию',
     Desc = 'По убыванию',
-    Reset = 'Сбросить'
+    Reset = 'Сбросить',
 }
 
 interface IDropdownSortProps {
-    /** Ф-я сортировки по возрастанию */
+
+    /** Ф-я сортировки по возрастанию. */
     sortAscending(): void;
 
-    /** Ф-я сортировки по убыванию */
+    /** Ф-я сортировки по убыванию. */
     sortDescending(): void;
 
-    /** Сброс сортировки */
+    /** Сброс сортировки. */
     resetSorting(): void;
 }
 
-export const DropdownSort: FC<IDropdownSortProps> = (props) => {
-    const {sortAscending, sortDescending, resetSorting} = props;
+export const DropdownSort: FC<IDropdownSortProps> = props => {
+    const { sortAscending, sortDescending, resetSorting } = props;
 
     const [currentSortName, setCurrentSortName] = useState<SortName | ''>('');
 
-    const onClickMenuItem = (onSort: () => void, sortName: SortName) => {
-        setCurrentSortName(sortName)
+    const onClickMenuItem = (onSort: () => void, sortName: SortName): void => {
+        setCurrentSortName(sortName);
         onSort();
-    }
+    };
 
-    const renderToggle = () => {
+    const renderToggle = (): string => {
         if (currentSortName === '' || currentSortName === SortName.Reset) {
             return 'Сортировка';
         }
 
         return `Сортировка: ${currentSortName}`;
-    }
+    };
 
     return (
         <Dropdown>
@@ -58,4 +60,3 @@ export const DropdownSort: FC<IDropdownSortProps> = (props) => {
         </Dropdown>
     );
 };
-

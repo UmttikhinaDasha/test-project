@@ -1,29 +1,30 @@
-import axiosInstance from "./axiosInstance";
-import {IPost} from "models/post";
-import {IComment} from "models/comment";
-import {IUserResponse} from "models/user";
-import {TSort} from "models/sort";
+import { IPost } from 'models/post';
+import { IComment } from 'models/comment';
+import { IUserResponse } from 'models/user';
+import { TSort } from 'models/sort';
+import { AxiosResponse } from 'axios';
 
+import axiosInstance from './axiosInstance';
 
-export const getPosts = (page: number, sort?: TSort, search?: string) => {
+export const getPosts = (page: number, sort?: TSort, search?: string): Promise<AxiosResponse<IPost[]>> => {
     let url = `/posts?_page=${page}`;
     if (sort) {
-        url = url + `&_sort=title&_order=${sort}`
+        url += `&_sort=title&_order=${sort}`;
     }
     if (search) {
-        url = url + `&title_like=${search}`
+        url += `&title_like=${search}`;
     }
     return axiosInstance.get<IPost[]>(url);
-}
+};
 
-export const getComments = (postId: number) => {
-    return axiosInstance.get<IComment[]>(`/comments?postId=${postId}`)
-}
+export const getComments = (postId: number): Promise<AxiosResponse<IComment[]>> => {
+    return axiosInstance.get<IComment[]>(`/comments?postId=${postId}`);
+};
 
-export const getUserData = (userId: number) => {
-    return axiosInstance.get<IUserResponse>(`/users/${userId}`)
-}
+export const getUserData = (userId: number): Promise<AxiosResponse<IUserResponse>> => {
+    return axiosInstance.get<IUserResponse>(`/users/${userId}`);
+};
 
-export const getUserPosts = (userId: number) => {
-    return axiosInstance.get<IPost[]>(`posts?userId=${userId}`)
-}
+export const getUserPosts = (userId: number): Promise<AxiosResponse<IPost[]>> => {
+    return axiosInstance.get<IPost[]>(`posts?userId=${userId}`);
+};
